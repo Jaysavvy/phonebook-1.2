@@ -2,7 +2,7 @@ const http = require("http");
 
 //Middleware
 const express = require("express");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 const cors = require("cors");
 
 const app = express();
@@ -17,7 +17,7 @@ const requestLogger = (request, response, next) => {
   next();
 };
 
-app.use(morgan("combined", Request));
+// app.use(morgan("combined", Request));
 
 app.use(express.json());
 app.use(requestLogger);
