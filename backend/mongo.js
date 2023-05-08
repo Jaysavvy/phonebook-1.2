@@ -47,6 +47,6 @@ process.argv.length > 3
       console.log(`added ${name} number ${number} to phonebook`);
       mongoose.connection.close();
     })
-  : PhoneNumber.find({}).then((people) => {
+  : PhoneNumber.find({}).then(() => {
       console.log(`${phone.name} ${phone.number}`);
     });
