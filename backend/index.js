@@ -99,16 +99,18 @@ app.get("/info", (request, response) => {
   );
 });
 
-// app.delete("/api/persons/:id", (request, response) => {
-//   const id = Number(request.params.id);
-//   persons = persons.filter((person) => person.id !== id);
+app.delete("/api/persons/:id", (request, response) => {
+  Person.findByIdAndRemove(request.params.id)
+    .then(() => {
+      response.status(204).end();
+    })
 
-//   response.status(204).end();
-// });
+    .catch((error) => error);
+});
 
 app.post("/api/persons", (request, response) => {
   const body = request.body;
-  console.log(request.body);
+
   const person = new Person({
     name: body.name,
     number: body.number,
