@@ -128,7 +128,6 @@ app.put("/api/person/: id", (request, response, next) => {
   const person = {
     name: body.name,
     number: body.number,
-    important: body.important,
   };
 
   Person.findByIdAndUpdate(request.params.id, person, { new: true })
@@ -137,6 +136,26 @@ app.put("/api/person/: id", (request, response, next) => {
     })
     .catch((error) => next(error));
 });
+
+const unknownEndpoint = (req, res) => {
+  res.status(404).send({ error: "unknown endpoint" });
+};
+
+app.use(unknownEndpoint);
+
+const errorHandler = (error, req, res, next) => {
+  console.error(error.message);
+
+  if (error.name === "CastError") {
+    return res.status(400).send({ error: "malformatted id" });
+  } else if (error.name === "ValidationError") {
+    return res.status(400).json({ error: error.message });
+  }
+
+  next(error);
+};
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3005;
 app.listen(PORT);
