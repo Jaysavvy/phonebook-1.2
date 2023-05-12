@@ -18,8 +18,15 @@ mongoose
   });
 
 const phoneSchema = new mongoose.Schema({
-  name: String,
-  number: String,
+  name: {
+    type: String,
+    minLength: 3,
+    unique: true,
+  },
+  number: {
+    type: string,
+    match: /^\d{8}$/g,
+  },
   important: Boolean,
 });
 
