@@ -24,7 +24,7 @@ const phoneSchema = new mongoose.Schema({
     unique: true,
   },
   number: {
-    type: string,
+    type: String,
     match: /^\d{8}$/g,
   },
   important: Boolean,

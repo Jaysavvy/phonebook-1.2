@@ -122,7 +122,7 @@ app.post("/api/persons", (request, response) => {
   });
 });
 
-app.put("/api/person/: id", (request, response, next) => {
+app.put("/api/persons/:id", (request, response) => {
   const body = request.body;
 
   const person = {
@@ -134,11 +134,9 @@ app.put("/api/person/: id", (request, response, next) => {
     runValidators: true,
     context: "query",
     new: true,
-  })
-    .then((updatedPerson) => {
-      response.json(updatedPerson);
-    })
-    .catch((error) => next(error));
+  }).then((updatedPerson) => {
+    response.json(updatedPerson);
+  });
 });
 
 const unknownEndpoint = (req, res) => {
